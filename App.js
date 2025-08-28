@@ -4,8 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'react-native-web';
 
 export default function App() {
-  // Estados: O que o usuário digita e o nome salvo
-  const [ nome, setNome ] = useState('');
+  
+  const [nome, setNome] = useState('');
   const [nomeSalvo, setNomeSalvo] = useState('');
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function App() {
     buscarNome();
   }, []);
 
-  // Faunção para salvar o nome
+
   const salvarNome = async () => {
     if (nome === '') {
       alert('Digite um nome primeiro!');
@@ -26,22 +26,22 @@ export default function App() {
     }
     await AsyncStorage.setItem('nomeUsuario', nome);
     setNomeSalvo(nome);
-    setNome(''); // Limpa o campo
+    setNome(''); 
     alert('Nome salvo com sucesso!');
   };
 
-  return(
-    <View style={StyleSheet.container}>
+  return (
+    <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <Text style={StyleSheet.titulo}>Meu Primeiro App! 📱</Text>
-      <Text style={StyleSheet.texto}>
+      <Text style={styles.titulo}>Meu Primeiro App! 📱</Text>
+      <Text style={styles.texto}>
         {nomeSalvo ? `Olá, ${nomeSalvo}!` : 'Nenhum nome salvo.'}
       </Text>
-
-      <TextInput style={StyleSheet.input}
-      placeholder="Digite seu nome"
-      value={nome}
-      onChangeText={setNome}
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu nome"
+        value={nome}
+        onChangeText={setNome}
       />
       <Button title="Salvar Nome" onPress={salvarNome} />
     </View>
